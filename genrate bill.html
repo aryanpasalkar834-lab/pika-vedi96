@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electricity Bill Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f7;
+        }
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Electricity Bill</h2>
+
+    <label>Consumer Name</label>
+    <input type="text" id="name">
+
+    <label>House Number</label>
+    <input type="number" id="houseNo">
+
+    <label>Units Consumed</label>
+    <input type="number" id="units">
+
+    <button onclick="calculateBill()"><a href="">Generate Bill</a></button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateBill() {
+    let name = document.getElementById("name").value;
+    let houseNo = document.getElementById("houseNo").value;
+    let units = parseInt(document.getElementById("units").value);
+    let bill = 0;
+
+    if (units <= 100) {
+        bill = units * 1.50;
+    } 
+    else if (units <= 200) {
+        bill = (100 * 1.50) + (units - 100) * 2.50;
+    } 
+    else {
+        bill = (100 * 1.50) + (100 * 2.50) + (units - 200) * 4.00;
+    }
+
+    document.getElementById("result").innerHTML = `
+        <h3>------ Electricity Bill ------</h3>
+        <p><b>Consumer Name:</b> ${name}</p>
+        <p><b>House Number:</b> ${houseNo}</p>
+        <p><b>Units Consumed:</b> ${units}</p>
+        <p><b>Total Bill:</b> Rs. ${bill.toFixed(2)}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
